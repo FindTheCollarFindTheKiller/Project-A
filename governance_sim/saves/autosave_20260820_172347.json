@@ -1,0 +1,1561 @@
+{
+  "year": 1925,
+  "player_id": "player",
+  "countries": {
+    "player": {
+      "id": "player",
+      "name": "Valdoria",
+      "adjective": "Mundavarian",
+      "capital": "Meldorcity",
+      "founding_year": 1628,
+      "current_year": 1905,
+      "geography": {
+        "terrain_types": [
+          {
+            "__enum__": "TerrainType",
+            "value": "Coastal"
+          },
+          {
+            "__enum__": "TerrainType",
+            "value": "Plains"
+          }
+        ],
+        "climate_zone": {
+          "__enum__": "ClimateZone",
+          "value": "Mediterranean"
+        },
+        "area_km2": 1936309.055450757,
+        "coastline_km": 601.7793286678809,
+        "is_landlocked": false,
+        "river_count": 2,
+        "natural_resources": {
+          "__EK__ResourceType__Fish": 0.7945884856656049,
+          "__EK__ResourceType__Arable Land": 0.5706797949691645
+        },
+        "neighbor_count": 2,
+        "border_defensibility": 0.2430643573562958,
+        "natural_disaster_risk": {
+          "__EK__DisasterType__Hurricane / Cyclone": 0.3180985024898079,
+          "__EK__DisasterType__Tsunami": 0.0063565358963567214
+        },
+        "elevation_mean_m": 481.61498323998427,
+        "arable_fraction": 0.5706797949691645
+      },
+      "government": {
+        "type": {
+          "__enum__": "GovernmentType",
+          "value": "Autocracy"
+        },
+        "election_system": {
+          "__enum__": "ElectionSystem",
+          "value": "Proportional Representation"
+        },
+        "succession_type": {
+          "__enum__": "SuccessionType",
+          "value": "Election"
+        },
+        "executive_strength": 0.38030042882291876,
+        "legislative_strength": 0.6333920809330276,
+        "judicial_independence": 0.74070533327932,
+        "corruption": 0.3560894506380681,
+        "civil_liberties": 0.615612189381968,
+        "press_freedom": 0.538578625175985,
+        "military_loyalty": 0.8736267744433245,
+        "legitimacy": 0.49439690334340686,
+        "years_in_power": 4,
+        "tax_rate": 0.2822912501533682,
+        "budget_allocation": {
+          "military": 0.22012519863488536,
+          "education": 0.14478309897888322,
+          "healthcare": 0.06820921360412312,
+          "infrastructure": 0.09095542782604049,
+          "social_welfare": 0.0769917010075635,
+          "administration": 0.05072918390316449,
+          "research": 0.027140403198556675,
+          "other": 0.32106577284678306
+        },
+        "policy_reform_speed": 0.7367095331073334
+      },
+      "culture": {
+        "individualism": 0.3797923966957349,
+        "power_distance": 0.5099537751118093,
+        "uncertainty_avoidance": 0.5679765922412867,
+        "long_term_orientation": 0.33817624881627867,
+        "indulgence": 0.5357062735503635,
+        "competition": 0.5737721826711306,
+        "dominant_religion": {
+          "__enum__": "Religion",
+          "value": "Secular / Atheist"
+        },
+        "minority_religions": [
+          {
+            "__enum__": "Religion",
+            "value": "Buddhism"
+          },
+          {
+            "__enum__": "Religion",
+            "value": "Hinduism"
+          }
+        ],
+        "religious_influence": 0.21114853666865674,
+        "secularism": 0.5861255048430355,
+        "ethnic_diversity": 0.05259950387122439,
+        "ethnic_tension": 0.12228182701011692,
+        "national_identity": 0.7053976516026097,
+        "class_rigidity": 0.2408841106079395,
+        "gender_equality": 0.4810604631765563,
+        "cultural_output": 0.3594896902423142,
+        "diaspora_influence": 0.1703845028676399
+      },
+      "language": {
+        "official_languages": [
+          "Language A"
+        ],
+        "dominant_family": {
+          "__enum__": "LanguageFamily",
+          "value": "Dravidian"
+        },
+        "script_system": {
+          "__enum__": "ScriptSystem",
+          "value": "Devanagari"
+        },
+        "linguistic_diversity": 0.11099913910512489,
+        "literacy_rate": 0.780309944737164,
+        "lingua_franca": null,
+        "policy": {
+          "__enum__": "LanguagePolicy",
+          "value": "Bilingual Education"
+        },
+        "diaspora_language_reach": 0.11926915200734792
+      },
+      "economy": {
+        "system": {
+          "__enum__": "EconomicSystem",
+          "value": "Mixed Economy"
+        },
+        "gdp_total": 162.05892055746816,
+        "gdp_per_capita": 2901.100086676772,
+        "gdp_growth": 0.17500000000000002,
+        "gini_coefficient": 0.4443605188013617,
+        "inflation": 0.0,
+        "unemployment": 0.01,
+        "trade_balance": 21.941987165723045,
+        "foreign_debt_gdp": 0.615254449674218,
+        "trade_agreements": 5,
+        "sector_weights": {
+          "Agriculture": 0.16442377335786612,
+          "Manufacturing": 0.17462816556560887,
+          "Services": 0.34244072026520334,
+          "Technology": 0.08094168239376136,
+          "Resource Extraction": 0.11682201376003708,
+          "Tourism": 0.04582335558209467,
+          "Finance": 0.07492028907542857
+        },
+        "resource_income_fraction": 0.1706585350793462,
+        "sanctions_level": 0.0
+      },
+      "demographics": {
+        "population": 54804668,
+        "growth_rate": -0.018913443799177792,
+        "median_age": 37.84749697371441,
+        "urbanization": 0.6599753875591023,
+        "education_index": 0.7387187701396639,
+        "healthcare_index": 0.7201019763817385,
+        "happiness": 0.29218361973066287,
+        "immigration_rate": 0.988706118339272,
+        "emigration_rate": 3.107461437320623,
+        "youth_bulge": 0.0,
+        "social_mobility": 0.6987665375756816
+      },
+      "military": {
+        "size": 205459,
+        "reserve_size": 410918,
+        "tech_tier": {
+          "__enum__": "TechTier",
+          "value": 5
+        },
+        "defense_spending_gdp": 0.1507920409126414,
+        "doctrine": {
+          "__enum__": "MilitaryDoctrine",
+          "value": "Conventional"
+        },
+        "has_nuclear": false,
+        "morale": 0.6894323089936767,
+        "training_quality": 0.6535851032995964,
+        "equipment_quality": 0.9709883520940548,
+        "veteran_ratio": 0.16917768567222563,
+        "paramilitary_strength": 0.24041496633540319
+      },
+      "technology": {
+        "tier": {
+          "__enum__": "TechTier",
+          "value": 5
+        },
+        "rd_spending_gdp": 0.04365145161947836,
+        "innovation_index": 0.7040593105105263,
+        "tech_adoption_rate": 0.43516354137636576,
+        "digital_penetration": 0.8631611608971094,
+        "education_quality": 0.7870995457944082,
+        "brain_drain": 0.3455677017761826,
+        "patent_output": 0.26637321455923507
+      },
+      "stability": {
+        "overall": 0.49323420020861225,
+        "political": 0.3229608619380819,
+        "social": 0.014209044316390473,
+        "economic": 0.8657491100651565,
+        "revolution_risk": 0.30613380464485457,
+        "coup_risk": 0.01,
+        "separatism_risk": 0.18326241821181133,
+        "protest_level": 0.4717610180184915,
+        "civil_war_risk": 0.018326241821181134
+      },
+      "history": [
+        {
+          "year": 1900,
+          "title": "Military Coup",
+          "description": "[COUP] Military seizes power in Valdoria!",
+          "effects": {}
+        },
+        {
+          "year": 1901,
+          "title": "Border Skirmish",
+          "description": "Armed clashes with a neighboring country raise war fears.",
+          "effects": {}
+        },
+        {
+          "year": 1901,
+          "title": "Epidemic Outbreak",
+          "description": "A dangerous disease spreads through the population.",
+          "effects": {}
+        },
+        {
+          "year": 1901,
+          "title": "Natural Disaster",
+          "description": "A severe natural disaster devastates part of the country.",
+          "effects": {}
+        },
+        {
+          "year": 1902,
+          "title": "Border Skirmish",
+          "description": "Armed clashes with a neighboring country raise war fears.",
+          "effects": {}
+        },
+        {
+          "year": 1902,
+          "title": "Technological Breakthrough",
+          "description": "Researchers make a paradigm-shifting scientific discovery.",
+          "effects": {}
+        },
+        {
+          "year": 1902,
+          "title": "Cultural Renaissance",
+          "description": "A flourishing of arts, literature, and national pride.",
+          "effects": {}
+        },
+        {
+          "year": 1903,
+          "title": "Border Skirmish",
+          "description": "Armed clashes with a neighboring country raise war fears.",
+          "effects": {}
+        },
+        {
+          "year": 1904,
+          "title": "Border Skirmish",
+          "description": "Armed clashes with a neighboring country raise war fears.",
+          "effects": {}
+        },
+        {
+          "year": 1904,
+          "title": "Major Terrorist Attack",
+          "description": "A devastating attack kills hundreds and shocks the nation.",
+          "effects": {}
+        },
+        {
+          "year": 1904,
+          "title": "Natural Disaster",
+          "description": "A severe natural disaster devastates part of the country.",
+          "effects": {}
+        }
+      ],
+      "neighbor_ids": [
+        "ai_0",
+        "ai_1",
+        "ai_2"
+      ],
+      "pending_events": []
+    },
+    "ai_0": {
+      "id": "ai_0",
+      "name": "Elsvaraon",
+      "adjective": "Elsvaraian",
+      "capital": "Neltharhaven",
+      "founding_year": 1704,
+      "current_year": 1905,
+      "geography": {
+        "terrain_types": [
+          {
+            "__enum__": "TerrainType",
+            "value": "Plains"
+          },
+          {
+            "__enum__": "TerrainType",
+            "value": "Wetlands"
+          }
+        ],
+        "climate_zone": {
+          "__enum__": "ClimateZone",
+          "value": "Temperate"
+        },
+        "area_km2": 516565.3753167757,
+        "coastline_km": 1499.7657103578395,
+        "is_landlocked": false,
+        "river_count": 5,
+        "natural_resources": {
+          "__EK__ResourceType__Arable Land": 0.9878722675543696,
+          "__EK__ResourceType__Freshwater": 0.9887552395480458
+        },
+        "neighbor_count": 7,
+        "border_defensibility": 0.40557979794640203,
+        "natural_disaster_risk": {
+          "__EK__DisasterType__Flood": 0.48252556786896417,
+          "__EK__DisasterType__Drought": 0.2741037139673534
+        },
+        "elevation_mean_m": 487.1761691505379,
+        "arable_fraction": 0.9878722675543696
+      },
+      "government": {
+        "type": {
+          "__enum__": "GovernmentType",
+          "value": "Autocracy"
+        },
+        "election_system": {
+          "__enum__": "ElectionSystem",
+          "value": "No Elections"
+        },
+        "succession_type": {
+          "__enum__": "SuccessionType",
+          "value": "Hereditary"
+        },
+        "executive_strength": 0.4814300251743512,
+        "legislative_strength": 0.3052727523106772,
+        "judicial_independence": 0.13630125876047972,
+        "corruption": 0.6052831814331671,
+        "civil_liberties": 0.1617299123255772,
+        "press_freedom": 0.1,
+        "military_loyalty": 0.8012259226083523,
+        "legitimacy": 0.39011120685029615,
+        "years_in_power": 4,
+        "tax_rate": 0.26415041830565616,
+        "budget_allocation": {
+          "military": 0.1862776116150076,
+          "education": 0.13254045102070064,
+          "healthcare": 0.1188837828955538,
+          "infrastructure": 0.0889741528436812,
+          "social_welfare": 0.0786456512074737,
+          "administration": 0.10158237166634601,
+          "research": 0.04258807620886866,
+          "other": 0.2505079025423685
+        },
+        "policy_reform_speed": 0.3014381677970187
+      },
+      "culture": {
+        "individualism": 0.44960503800073276,
+        "power_distance": 0.31461961430126134,
+        "uncertainty_avoidance": 0.7313998990614012,
+        "long_term_orientation": 0.6189736322473098,
+        "indulgence": 0.667397397758281,
+        "competition": 0.4895778337840916,
+        "dominant_religion": {
+          "__enum__": "Religion",
+          "value": "Islam"
+        },
+        "minority_religions": [
+          {
+            "__enum__": "Religion",
+            "value": "Buddhism"
+          }
+        ],
+        "religious_influence": 0.4957809241352235,
+        "secularism": 0.29634863697889324,
+        "ethnic_diversity": 0.39544228321157915,
+        "ethnic_tension": 0.09428535227460902,
+        "national_identity": 0.7269427774755639,
+        "class_rigidity": 0.23150281931654645,
+        "gender_equality": 0.6880411425751458,
+        "cultural_output": 0.5080116267100443,
+        "diaspora_influence": 0.392294572787067
+      },
+      "language": {
+        "official_languages": [
+          "Language A"
+        ],
+        "dominant_family": {
+          "__enum__": "LanguageFamily",
+          "value": "Koreanic"
+        },
+        "script_system": {
+          "__enum__": "ScriptSystem",
+          "value": "CJK (Chinese / Japanese / Korean)"
+        },
+        "linguistic_diversity": 0.30893853999888277,
+        "literacy_rate": 0.6286054431991265,
+        "lingua_franca": null,
+        "policy": {
+          "__enum__": "LanguagePolicy",
+          "value": "Active Promotion"
+        },
+        "diaspora_language_reach": 0.27460620095094684
+      },
+      "economy": {
+        "system": {
+          "__enum__": "EconomicSystem",
+          "value": "Mixed Economy"
+        },
+        "gdp_total": 895.2070963754155,
+        "gdp_per_capita": 19589.118785387447,
+        "gdp_growth": 0.2,
+        "gini_coefficient": 0.3285994484791449,
+        "inflation": 0.0,
+        "unemployment": 0.01,
+        "trade_balance": 155.9872073494305,
+        "foreign_debt_gdp": 0.5135930998058653,
+        "trade_agreements": 2,
+        "sector_weights": {
+          "Agriculture": 0.18095266934126444,
+          "Manufacturing": 0.1958782325907274,
+          "Services": 0.24424612757389402,
+          "Technology": 0.06098571607176413,
+          "Resource Extraction": 0.19489742610522254,
+          "Tourism": 0.04493339427811747,
+          "Finance": 0.07810643403900985
+        },
+        "resource_income_fraction": 0.2470784383878019,
+        "sanctions_level": 0.0
+      },
+      "demographics": {
+        "population": 44893185,
+        "growth_rate": -0.017637431480632956,
+        "median_age": 34.53006267512001,
+        "urbanization": 0.7724025913888811,
+        "education_index": 0.5302164424293594,
+        "healthcare_index": 0.6356782945654247,
+        "happiness": 0.2883835459702992,
+        "immigration_rate": 3.0487475595441396,
+        "emigration_rate": 3.302073788015946,
+        "youth_bulge": 0.0,
+        "social_mobility": 0.41602921527169634
+      },
+      "military": {
+        "size": 871921,
+        "reserve_size": 1743842,
+        "tech_tier": {
+          "__enum__": "TechTier",
+          "value": 4
+        },
+        "defense_spending_gdp": 0.11219158713470583,
+        "doctrine": {
+          "__enum__": "MilitaryDoctrine",
+          "value": "Conventional"
+        },
+        "has_nuclear": false,
+        "morale": 0.7295041975495868,
+        "training_quality": 0.6492510708146255,
+        "equipment_quality": 0.9352499726242055,
+        "veteran_ratio": 0.21973914688286109,
+        "paramilitary_strength": 0.3998933331811742
+      },
+      "technology": {
+        "tier": {
+          "__enum__": "TechTier",
+          "value": 4
+        },
+        "rd_spending_gdp": 0.021863771292135493,
+        "innovation_index": 0.5008929291181204,
+        "tech_adoption_rate": 0.23582636791563652,
+        "digital_penetration": 0.6935482932259741,
+        "education_quality": 0.46723021409810916,
+        "brain_drain": 0.2514752242078019,
+        "patent_output": 0.36179463199607464
+      },
+      "stability": {
+        "overall": 0.4235318563411297,
+        "political": 0.13134494960363008,
+        "social": 0.08924774276631767,
+        "economic": 0.8860813800388269,
+        "revolution_risk": 0.3191592553539292,
+        "coup_risk": 0.01,
+        "separatism_risk": 0.32198793433493256,
+        "protest_level": 0.5593985259222116,
+        "civil_war_risk": 0.03219879343349326
+      },
+      "history": [
+        {
+          "year": 1900,
+          "title": "Constitutional Reform Movement",
+          "description": "Civil society demands significant constitutional changes.",
+          "effects": {}
+        },
+        {
+          "year": 1900,
+          "title": "Border Skirmish",
+          "description": "Armed clashes with a neighboring country raise war fears.",
+          "effects": {}
+        },
+        {
+          "year": 1900,
+          "title": "Natural Disaster",
+          "description": "A severe natural disaster devastates part of the country.",
+          "effects": {}
+        },
+        {
+          "year": 1900,
+          "title": "Military Coup",
+          "description": "[COUP] Military seizes power in Elsvaraon!",
+          "effects": {}
+        },
+        {
+          "year": 1901,
+          "title": "Constitutional Reform Movement",
+          "description": "Civil society demands significant constitutional changes.",
+          "effects": {}
+        },
+        {
+          "year": 1901,
+          "title": "Major Social Movement",
+          "description": "A broad social movement demands equality and justice.",
+          "effects": {}
+        },
+        {
+          "year": 1901,
+          "title": "Border Skirmish",
+          "description": "Armed clashes with a neighboring country raise war fears.",
+          "effects": {}
+        },
+        {
+          "year": 1901,
+          "title": "Technological Breakthrough",
+          "description": "Researchers make a paradigm-shifting scientific discovery.",
+          "effects": {}
+        },
+        {
+          "year": 1901,
+          "title": "Natural Disaster",
+          "description": "A severe natural disaster devastates part of the country.",
+          "effects": {}
+        },
+        {
+          "year": 1902,
+          "title": "Constitutional Reform Movement",
+          "description": "Civil society demands significant constitutional changes.",
+          "effects": {}
+        },
+        {
+          "year": 1902,
+          "title": "Major Social Movement",
+          "description": "A broad social movement demands equality and justice.",
+          "effects": {}
+        },
+        {
+          "year": 1902,
+          "title": "Border Skirmish",
+          "description": "Armed clashes with a neighboring country raise war fears.",
+          "effects": {}
+        },
+        {
+          "year": 1902,
+          "title": "Epidemic Outbreak",
+          "description": "A dangerous disease spreads through the population.",
+          "effects": {}
+        },
+        {
+          "year": 1903,
+          "title": "Constitutional Reform Movement",
+          "description": "Civil society demands significant constitutional changes.",
+          "effects": {}
+        },
+        {
+          "year": 1903,
+          "title": "Major Social Movement",
+          "description": "A broad social movement demands equality and justice.",
+          "effects": {}
+        },
+        {
+          "year": 1903,
+          "title": "Border Skirmish",
+          "description": "Armed clashes with a neighboring country raise war fears.",
+          "effects": {}
+        },
+        {
+          "year": 1904,
+          "title": "Constitutional Reform Movement",
+          "description": "Civil society demands significant constitutional changes.",
+          "effects": {}
+        },
+        {
+          "year": 1904,
+          "title": "Corruption Scandal",
+          "description": "A major corruption scandal implicates senior officials.",
+          "effects": {}
+        },
+        {
+          "year": 1904,
+          "title": "Major Social Movement",
+          "description": "A broad social movement demands equality and justice.",
+          "effects": {}
+        },
+        {
+          "year": 1904,
+          "title": "Border Skirmish",
+          "description": "Armed clashes with a neighboring country raise war fears.",
+          "effects": {}
+        },
+        {
+          "year": 1904,
+          "title": "Major Terrorist Attack",
+          "description": "A devastating attack kills hundreds and shocks the nation.",
+          "effects": {}
+        }
+      ],
+      "neighbor_ids": [
+        "player",
+        "ai_1",
+        "ai_2"
+      ],
+      "pending_events": []
+    },
+    "ai_1": {
+      "id": "ai_1",
+      "name": "Meldorora",
+      "adjective": "Meldorian",
+      "capital": "Mundavarport",
+      "founding_year": 1403,
+      "current_year": 1905,
+      "geography": {
+        "terrain_types": [
+          {
+            "__enum__": "TerrainType",
+            "value": "Coastal"
+          },
+          {
+            "__enum__": "TerrainType",
+            "value": "Plains"
+          }
+        ],
+        "climate_zone": {
+          "__enum__": "ClimateZone",
+          "value": "Mediterranean"
+        },
+        "area_km2": 1297872.0836709805,
+        "coastline_km": 7679.882306447549,
+        "is_landlocked": false,
+        "river_count": 1,
+        "natural_resources": {
+          "__EK__ResourceType__Fish": 0.7223073293622473,
+          "__EK__ResourceType__Arable Land": 0.5873633101185304,
+          "__EK__ResourceType__Iron": 0.13901234764836926
+        },
+        "neighbor_count": 6,
+        "border_defensibility": 0.2754419239078917,
+        "natural_disaster_risk": {
+          "__EK__DisasterType__Hurricane / Cyclone": 0.3937418729938318,
+          "__EK__DisasterType__Tsunami": 0.11583605816325125
+        },
+        "elevation_mean_m": 40.11386981116285,
+        "arable_fraction": 0.5873633101185304
+      },
+      "government": {
+        "type": {
+          "__enum__": "GovernmentType",
+          "value": "Democracy"
+        },
+        "election_system": {
+          "__enum__": "ElectionSystem",
+          "value": "Proportional Representation"
+        },
+        "succession_type": {
+          "__enum__": "SuccessionType",
+          "value": "Election"
+        },
+        "executive_strength": 0.5112903212304882,
+        "legislative_strength": 0.7017654082146296,
+        "judicial_independence": 0.5897369711099402,
+        "corruption": 0.1,
+        "civil_liberties": 1.0,
+        "press_freedom": 0.7494861207523091,
+        "military_loyalty": 0.6498053275844499,
+        "legitimacy": 0.4,
+        "years_in_power": 0,
+        "tax_rate": 0.1952394931771571,
+        "budget_allocation": {
+          "military": 0.1457224572570452,
+          "education": 0.17432146653644115,
+          "healthcare": 0.14485874299558588,
+          "infrastructure": 0.0807452365507397,
+          "social_welfare": 0.10969274043944743,
+          "administration": 0.08377961873833677,
+          "research": 0.02399924995698354,
+          "other": 0.23688048752542035
+        },
+        "policy_reform_speed": 0.7667489909279613
+      },
+      "culture": {
+        "individualism": 0.501510898791168,
+        "power_distance": 0.5910879568193141,
+        "uncertainty_avoidance": 0.41297309117579334,
+        "long_term_orientation": 0.6343115613097802,
+        "indulgence": 0.3320445860962348,
+        "competition": 0.32432998439228927,
+        "dominant_religion": {
+          "__enum__": "Religion",
+          "value": "Buddhism"
+        },
+        "minority_religions": [],
+        "religious_influence": 0.261510220527311,
+        "secularism": 0.5766384508916358,
+        "ethnic_diversity": 0.4380140425800111,
+        "ethnic_tension": 0.26451379312862955,
+        "national_identity": 0.577870164055274,
+        "class_rigidity": 0.43156762300288426,
+        "gender_equality": 0.3177233362624905,
+        "cultural_output": 0.14099170274743775,
+        "diaspora_influence": 0.2800806075653829
+      },
+      "language": {
+        "official_languages": [
+          "Language A",
+          "Language B",
+          "Language C"
+        ],
+        "dominant_family": {
+          "__enum__": "LanguageFamily",
+          "value": "Semitic"
+        },
+        "script_system": {
+          "__enum__": "ScriptSystem",
+          "value": "Arabic"
+        },
+        "linguistic_diversity": 0.2786409427450987,
+        "literacy_rate": 0.6275239856489648,
+        "lingua_franca": null,
+        "policy": {
+          "__enum__": "LanguagePolicy",
+          "value": "Active Promotion"
+        },
+        "diaspora_language_reach": 0.196056425295768
+      },
+      "economy": {
+        "system": {
+          "__enum__": "EconomicSystem",
+          "value": "Mixed Economy"
+        },
+        "gdp_total": 1068.083980642602,
+        "gdp_per_capita": 48787.03992163453,
+        "gdp_growth": 0.125,
+        "gini_coefficient": 0.39064472817696316,
+        "inflation": 0.0,
+        "unemployment": 0.01,
+        "trade_balance": 112.6125259403116,
+        "foreign_debt_gdp": 0.33143892493098115,
+        "trade_agreements": 5,
+        "sector_weights": {
+          "Agriculture": 0.13806805154375015,
+          "Manufacturing": 0.270136056750287,
+          "Services": 0.285553527646002,
+          "Technology": 0.08653618324353833,
+          "Resource Extraction": 0.14786648982002645,
+          "Tourism": 0.03659757148058531,
+          "Finance": 0.035242119515810764
+        },
+        "resource_income_fraction": 0.12072358226076225,
+        "sanctions_level": 0.0
+      },
+      "demographics": {
+        "population": 21743298,
+        "growth_rate": -0.006827934724775666,
+        "median_age": 37.788078959383,
+        "urbanization": 0.7412615296293881,
+        "education_index": 0.8511417191200618,
+        "healthcare_index": 0.8221328692695221,
+        "happiness": 0.6228629213953467,
+        "immigration_rate": 1.4683807839028808,
+        "emigration_rate": 0.512409911807238,
+        "youth_bulge": 0.0,
+        "social_mobility": 0.6637167767688188
+      },
+      "military": {
+        "size": 1250995,
+        "reserve_size": 2501990,
+        "tech_tier": {
+          "__enum__": "TechTier",
+          "value": 5
+        },
+        "defense_spending_gdp": 0.14663426304115565,
+        "doctrine": {
+          "__enum__": "MilitaryDoctrine",
+          "value": "Conventional"
+        },
+        "has_nuclear": false,
+        "morale": 0.6641928329421628,
+        "training_quality": 0.5170108992486497,
+        "equipment_quality": 0.9112551427670924,
+        "veteran_ratio": 0.11165166998602673,
+        "paramilitary_strength": 0.36969444662277695
+      },
+      "technology": {
+        "tier": {
+          "__enum__": "TechTier",
+          "value": 5
+        },
+        "rd_spending_gdp": 0.02880779744424372,
+        "innovation_index": 0.7047640576530337,
+        "tech_adoption_rate": 0.5295108462836409,
+        "digital_penetration": 0.729795217807744,
+        "education_quality": 0.827618092223154,
+        "brain_drain": 0.6530125536964746,
+        "patent_output": 0.39396550393883534
+      },
+      "stability": {
+        "overall": 0.31944199196441836,
+        "political": 0.6142836050352821,
+        "social": 0.12196875913693858,
+        "economic": 0.9225122150138038,
+        "revolution_risk": 0.21204531073118688,
+        "coup_risk": 0.30738918251125014,
+        "separatism_risk": 0.1928334100892446,
+        "protest_level": 0.45924863144564193,
+        "civil_war_risk": 0.01928334100892446
+      },
+      "history": [
+        {
+          "year": 1900,
+          "title": "Major Social Movement",
+          "description": "A broad social movement demands equality and justice.",
+          "effects": {}
+        },
+        {
+          "year": 1901,
+          "title": "Major Social Movement",
+          "description": "A broad social movement demands equality and justice.",
+          "effects": {}
+        },
+        {
+          "year": 1901,
+          "title": "Natural Disaster",
+          "description": "A severe natural disaster devastates part of the country.",
+          "effects": {}
+        },
+        {
+          "year": 1902,
+          "title": "Major Social Movement",
+          "description": "A broad social movement demands equality and justice.",
+          "effects": {}
+        },
+        {
+          "year": 1902,
+          "title": "Epidemic Outbreak",
+          "description": "A dangerous disease spreads through the population.",
+          "effects": {}
+        },
+        {
+          "year": 1902,
+          "title": "Technological Breakthrough",
+          "description": "Researchers make a paradigm-shifting scientific discovery.",
+          "effects": {}
+        },
+        {
+          "year": 1902,
+          "title": "Revolution",
+          "description": "[REVOLUTION] Popular uprising overthrows the government in Meldorora!",
+          "effects": {}
+        },
+        {
+          "year": 1903,
+          "title": "Major Social Movement",
+          "description": "A broad social movement demands equality and justice.",
+          "effects": {}
+        },
+        {
+          "year": 1904,
+          "title": "Major Social Movement",
+          "description": "A broad social movement demands equality and justice.",
+          "effects": {}
+        },
+        {
+          "year": 1904,
+          "title": "Natural Disaster",
+          "description": "A severe natural disaster devastates part of the country.",
+          "effects": {}
+        },
+        {
+          "year": 1904,
+          "title": "Revolution",
+          "description": "[REVOLUTION] Popular uprising overthrows the government in Meldorora!",
+          "effects": {}
+        }
+      ],
+      "neighbor_ids": [
+        "player",
+        "ai_0",
+        "ai_2"
+      ],
+      "pending_events": []
+    },
+    "ai_2": {
+      "id": "ai_2",
+      "name": "Mundavaristan",
+      "adjective": "Mundavarian",
+      "capital": "Torvanhaven",
+      "founding_year": 1528,
+      "current_year": 1905,
+      "geography": {
+        "terrain_types": [
+          {
+            "__enum__": "TerrainType",
+            "value": "Island"
+          },
+          {
+            "__enum__": "TerrainType",
+            "value": "Coastal"
+          }
+        ],
+        "climate_zone": {
+          "__enum__": "ClimateZone",
+          "value": "Tropical"
+        },
+        "area_km2": 1248813.3000047447,
+        "coastline_km": 5154.961326130346,
+        "is_landlocked": false,
+        "river_count": 6,
+        "natural_resources": {
+          "__EK__ResourceType__Fish": 0.6618213353328819,
+          "__EK__ResourceType__Arable Land": 0.47195240627746976,
+          "__EK__ResourceType__Diamonds": 0.29323151598211905
+        },
+        "neighbor_count": 7,
+        "border_defensibility": 0.5223263544193302,
+        "natural_disaster_risk": {
+          "__EK__DisasterType__Hurricane / Cyclone": 0.5762832409326649,
+          "__EK__DisasterType__Tsunami": 0.20495727237963773
+        },
+        "elevation_mean_m": 641.7881111497112,
+        "arable_fraction": 0.47195240627746976
+      },
+      "government": {
+        "type": {
+          "__enum__": "GovernmentType",
+          "value": "Constitutional Monarchy"
+        },
+        "election_system": {
+          "__enum__": "ElectionSystem",
+          "value": "No Elections"
+        },
+        "succession_type": {
+          "__enum__": "SuccessionType",
+          "value": "Appointment"
+        },
+        "executive_strength": 0.44410319425849737,
+        "legislative_strength": 0.33186265599184295,
+        "judicial_independence": 0.25342691790084343,
+        "corruption": 0.1005007009422208,
+        "civil_liberties": 1.0,
+        "press_freedom": 0.8088102287663601,
+        "military_loyalty": 0.8172072270961143,
+        "legitimacy": 0.5007702466167167,
+        "years_in_power": 1,
+        "tax_rate": 0.17027060451498072,
+        "budget_allocation": {
+          "military": 0.19704006110222277,
+          "education": 0.11428542529379711,
+          "healthcare": 0.14700274526092444,
+          "infrastructure": 0.10123730900183749,
+          "social_welfare": 0.0686722037771769,
+          "administration": 0.07607382551387866,
+          "research": 0.049141802426108175,
+          "other": 0.24654662762405444
+        },
+        "policy_reform_speed": 0.4851150330998166
+      },
+      "culture": {
+        "individualism": 0.6246448723202824,
+        "power_distance": 0.3567222838377888,
+        "uncertainty_avoidance": 0.6649498036541885,
+        "long_term_orientation": 0.29323825056118286,
+        "indulgence": 0.6488667131624359,
+        "competition": 0.5934373005351127,
+        "dominant_religion": {
+          "__enum__": "Religion",
+          "value": "Folk Religion"
+        },
+        "minority_religions": [
+          {
+            "__enum__": "Religion",
+            "value": "Hinduism"
+          }
+        ],
+        "religious_influence": 0.2220763469354402,
+        "secularism": 0.5181381996611447,
+        "ethnic_diversity": 0.2889734870182658,
+        "ethnic_tension": 0.23473177472949538,
+        "national_identity": 0.4410381949631082,
+        "class_rigidity": 0.20946577388058063,
+        "gender_equality": 0.46085057289312487,
+        "cultural_output": 0.26413097559885323,
+        "diaspora_influence": 0.35252352971060025
+      },
+      "language": {
+        "official_languages": [
+          "Language A"
+        ],
+        "dominant_family": {
+          "__enum__": "LanguageFamily",
+          "value": "Dravidian"
+        },
+        "script_system": {
+          "__enum__": "ScriptSystem",
+          "value": "Devanagari"
+        },
+        "linguistic_diversity": 0.23400049227302389,
+        "literacy_rate": 0.6697576902016393,
+        "lingua_franca": null,
+        "policy": {
+          "__enum__": "LanguagePolicy",
+          "value": "Multilingual Policy"
+        },
+        "diaspora_language_reach": 0.24676647079742015
+      },
+      "economy": {
+        "system": {
+          "__enum__": "EconomicSystem",
+          "value": "Mixed Economy"
+        },
+        "gdp_total": 623.6010173113642,
+        "gdp_per_capita": 16650.664431754663,
+        "gdp_growth": 0.2,
+        "gini_coefficient": 0.34185693244173065,
+        "inflation": 0.0,
+        "unemployment": 0.01,
+        "trade_balance": 65.6965311057529,
+        "foreign_debt_gdp": 0.3009151196236613,
+        "trade_agreements": 4,
+        "sector_weights": {
+          "Agriculture": 0.17930418897473147,
+          "Manufacturing": 0.16500518136982048,
+          "Services": 0.3426559620368521,
+          "Technology": 0.05738889402167262,
+          "Resource Extraction": 0.09134565634684474,
+          "Tourism": 0.08454545804769736,
+          "Finance": 0.07975465920238105
+        },
+        "resource_income_fraction": 0.11891710479937256,
+        "sanctions_level": 0.0
+      },
+      "demographics": {
+        "population": 36955421,
+        "growth_rate": -0.013259604193471526,
+        "median_age": 37.537917426128686,
+        "urbanization": 0.7916433192350371,
+        "education_index": 0.8143716880587519,
+        "healthcare_index": 0.6806460645026878,
+        "happiness": 0.5577024661671665,
+        "immigration_rate": 0.5014207889405063,
+        "emigration_rate": 1.5041980090412452,
+        "youth_bulge": 0.0,
+        "social_mobility": 0.6378225442732088
+      },
+      "military": {
+        "size": 987609,
+        "reserve_size": 1975218,
+        "tech_tier": {
+          "__enum__": "TechTier",
+          "value": 5
+        },
+        "defense_spending_gdp": 0.19271578920208332,
+        "doctrine": {
+          "__enum__": "MilitaryDoctrine",
+          "value": "Conventional"
+        },
+        "has_nuclear": false,
+        "morale": 0.673660694734117,
+        "training_quality": 0.491843269937173,
+        "equipment_quality": 0.997737809375,
+        "veteran_ratio": 0.09697371970533677,
+        "paramilitary_strength": 0.1931258392884746
+      },
+      "technology": {
+        "tier": {
+          "__enum__": "TechTier",
+          "value": 5
+        },
+        "rd_spending_gdp": 0.034375598657197665,
+        "innovation_index": 0.7034516888457596,
+        "tech_adoption_rate": 0.41317310555517883,
+        "digital_penetration": 0.6934725528179455,
+        "education_quality": 0.9772153516692863,
+        "brain_drain": 0.5592951710783741,
+        "patent_output": 0.28469662776218474
+      },
+      "stability": {
+        "overall": 0.5312500664189458,
+        "political": 0.5111660059965502,
+        "social": 0.21073391856449408,
+        "economic": 0.9286169760752677,
+        "revolution_risk": 0.3408341385694652,
+        "coup_risk": 0.01,
+        "separatism_risk": 0.1784825269840789,
+        "protest_level": 0.518593773320771,
+        "civil_war_risk": 0.017848252698407892
+      },
+      "history": [
+        {
+          "year": 1900,
+          "title": "Constitutional Reform Movement",
+          "description": "Civil society demands significant constitutional changes.",
+          "effects": {}
+        },
+        {
+          "year": 1900,
+          "title": "Epidemic Outbreak",
+          "description": "A dangerous disease spreads through the population.",
+          "effects": {}
+        },
+        {
+          "year": 1900,
+          "title": "Natural Disaster",
+          "description": "A severe natural disaster devastates part of the country.",
+          "effects": {}
+        },
+        {
+          "year": 1900,
+          "title": "Revolution",
+          "description": "[REVOLUTION] Popular uprising overthrows the government in Mundavaristan!",
+          "effects": {}
+        },
+        {
+          "year": 1901,
+          "title": "Constitutional Reform Movement",
+          "description": "Civil society demands significant constitutional changes.",
+          "effects": {}
+        },
+        {
+          "year": 1902,
+          "title": "Constitutional Reform Movement",
+          "description": "Civil society demands significant constitutional changes.",
+          "effects": {}
+        },
+        {
+          "year": 1902,
+          "title": "Epidemic Outbreak",
+          "description": "A dangerous disease spreads through the population.",
+          "effects": {}
+        },
+        {
+          "year": 1903,
+          "title": "Technological Breakthrough",
+          "description": "Researchers make a paradigm-shifting scientific discovery.",
+          "effects": {}
+        },
+        {
+          "year": 1903,
+          "title": "Natural Disaster",
+          "description": "A severe natural disaster devastates part of the country.",
+          "effects": {}
+        },
+        {
+          "year": 1903,
+          "title": "Revolution",
+          "description": "[REVOLUTION] Popular uprising overthrows the government in Mundavaristan!",
+          "effects": {}
+        },
+        {
+          "year": 1904,
+          "title": "Constitutional Reform Movement",
+          "description": "Civil society demands significant constitutional changes.",
+          "effects": {}
+        }
+      ],
+      "neighbor_ids": [
+        "player",
+        "ai_0",
+        "ai_1"
+      ],
+      "pending_events": []
+    },
+    "ai_3": {
+      "id": "ai_3",
+      "name": "Istmarkia",
+      "adjective": "Istmarkiian",
+      "capital": "Mundavarpolis",
+      "founding_year": 1724,
+      "current_year": 1905,
+      "geography": {
+        "terrain_types": [
+          {
+            "__enum__": "TerrainType",
+            "value": "Mountains"
+          },
+          {
+            "__enum__": "TerrainType",
+            "value": "Forest"
+          }
+        ],
+        "climate_zone": {
+          "__enum__": "ClimateZone",
+          "value": "Continental"
+        },
+        "area_km2": 1748229.1532574885,
+        "coastline_km": 0.0,
+        "is_landlocked": true,
+        "river_count": 2,
+        "natural_resources": {
+          "__EK__ResourceType__Iron": 0.7873383661995954,
+          "__EK__ResourceType__Timber": 0.5535913869571005,
+          "__EK__ResourceType__Copper": 0.35986114515061507,
+          "__EK__ResourceType__Freshwater": 0.25628672392415586
+        },
+        "neighbor_count": 7,
+        "border_defensibility": 0.6700584775770936,
+        "natural_disaster_risk": {
+          "__EK__DisasterType__Earthquake": 0.3785319652422733,
+          "__EK__DisasterType__Blizzard": 0.47208811308450427
+        },
+        "elevation_mean_m": 480.9223701810026,
+        "arable_fraction": 0.25
+      },
+      "government": {
+        "type": {
+          "__enum__": "GovernmentType",
+          "value": "Republic"
+        },
+        "election_system": {
+          "__enum__": "ElectionSystem",
+          "value": "No Elections"
+        },
+        "succession_type": {
+          "__enum__": "SuccessionType",
+          "value": "Appointment"
+        },
+        "executive_strength": 0.5581849436897157,
+        "legislative_strength": 0.3619257425083656,
+        "judicial_independence": 0.11926865521416344,
+        "corruption": 0.1,
+        "civil_liberties": 1.0,
+        "press_freedom": 0.4195444050278517,
+        "military_loyalty": 0.8517221438359881,
+        "legitimacy": 0.4,
+        "years_in_power": 0,
+        "tax_rate": 0.303262587094478,
+        "budget_allocation": {
+          "military": 0.1738410512837718,
+          "education": 0.11375764080467797,
+          "healthcare": 0.08494185978386552,
+          "infrastructure": 0.09775626432731571,
+          "social_welfare": 0.09556683129766343,
+          "administration": 0.053983744158304946,
+          "research": 0.02708375850845136,
+          "other": 0.3530688498359491
+        },
+        "policy_reform_speed": 0.3778953625333883
+      },
+      "culture": {
+        "individualism": 0.5075118219333027,
+        "power_distance": 0.2700873540562564,
+        "uncertainty_avoidance": 0.4496793118639887,
+        "long_term_orientation": 0.5893345389406639,
+        "indulgence": 0.482584730188069,
+        "competition": 0.5705666406889058,
+        "dominant_religion": {
+          "__enum__": "Religion",
+          "value": "Folk Religion"
+        },
+        "minority_religions": [
+          {
+            "__enum__": "Religion",
+            "value": "Hinduism"
+          },
+          {
+            "__enum__": "Religion",
+            "value": "Buddhism"
+          }
+        ],
+        "religious_influence": 0.3450609291047051,
+        "secularism": 0.4877095845103869,
+        "ethnic_diversity": 0.46703109303454127,
+        "ethnic_tension": 0.376987425183985,
+        "national_identity": 0.7019112659297607,
+        "class_rigidity": 0.532227667888566,
+        "gender_equality": 0.6329054238827039,
+        "cultural_output": 0.5486040516166311,
+        "diaspora_influence": 0.31027940475585475
+      },
+      "language": {
+        "official_languages": [
+          "Language A",
+          "Language B"
+        ],
+        "dominant_family": {
+          "__enum__": "LanguageFamily",
+          "value": "Japonic"
+        },
+        "script_system": {
+          "__enum__": "ScriptSystem",
+          "value": "CJK (Chinese / Japanese / Korean)"
+        },
+        "linguistic_diversity": 0.2977967956805309,
+        "literacy_rate": 0.6881264680369167,
+        "lingua_franca": null,
+        "policy": {
+          "__enum__": "LanguagePolicy",
+          "value": "Multilingual Policy"
+        },
+        "diaspora_language_reach": 0.2171955833290983
+      },
+      "economy": {
+        "system": {
+          "__enum__": "EconomicSystem",
+          "value": "Mixed Economy"
+        },
+        "gdp_total": 823.8247121957371,
+        "gdp_per_capita": 41372.20799058969,
+        "gdp_growth": 0.15000000000000002,
+        "gini_coefficient": 0.42692681215127154,
+        "inflation": 0.0,
+        "unemployment": 0.01,
+        "trade_balance": 82.70410131226822,
+        "foreign_debt_gdp": 0.35917412470530263,
+        "trade_agreements": 1,
+        "sector_weights": {
+          "Agriculture": 0.15441784883237347,
+          "Manufacturing": 0.21006189074026496,
+          "Services": 0.35889627124001744,
+          "Technology": 0.051050406396671605,
+          "Resource Extraction": 0.09493163638848282,
+          "Tourism": 0.0480400295393822,
+          "Finance": 0.0826019168628075
+        },
+        "resource_income_fraction": 0.12231735138946667,
+        "sanctions_level": 0.0
+      },
+      "demographics": {
+        "population": 19984292,
+        "growth_rate": 0.003604621738715741,
+        "median_age": 37.883038559574146,
+        "urbanization": 0.7977380501762288,
+        "education_index": 0.8001095844124553,
+        "healthcare_index": 0.7206095219160703,
+        "happiness": 0.55270139752589,
+        "immigration_rate": 3.932526921316231,
+        "emigration_rate": 2.369432703363765,
+        "youth_bulge": 0.013140194123741483,
+        "social_mobility": 0.6534741822734683
+      },
+      "military": {
+        "size": 713459,
+        "reserve_size": 1426918,
+        "tech_tier": {
+          "__enum__": "TechTier",
+          "value": 4
+        },
+        "defense_spending_gdp": 0.11297292954435412,
+        "doctrine": {
+          "__enum__": "MilitaryDoctrine",
+          "value": "Conventional"
+        },
+        "has_nuclear": false,
+        "morale": 0.7078595243741441,
+        "training_quality": 0.7254836351316768,
+        "equipment_quality": 0.780083271648041,
+        "veteran_ratio": 0.0663812465523285,
+        "paramilitary_strength": 0.1058149861150032
+      },
+      "technology": {
+        "tier": {
+          "__enum__": "TechTier",
+          "value": 4
+        },
+        "rd_spending_gdp": 0.027445026362388294,
+        "innovation_index": 0.5997463373174374,
+        "tech_adoption_rate": 0.5528701253352596,
+        "digital_penetration": 0.6198402503369955,
+        "education_quality": 0.827965116897142,
+        "brain_drain": 0.5418064914194128,
+        "patent_output": 0.3486006361947793
+      },
+      "stability": {
+        "overall": 0.2503506796322572,
+        "political": 0.4656452333271224,
+        "social": 0.027957987000235995,
+        "economic": 0.9169651750589395,
+        "revolution_risk": 0.35802596971332445,
+        "coup_risk": 0.01,
+        "separatism_risk": 0.26566028398320524,
+        "protest_level": 0.5432657390614317,
+        "civil_war_risk": 0.026566028398320524
+      },
+      "history": [
+        {
+          "year": 1900,
+          "title": "Constitutional Reform Movement",
+          "description": "Civil society demands significant constitutional changes.",
+          "effects": {}
+        },
+        {
+          "year": 1900,
+          "title": "Natural Disaster",
+          "description": "A severe natural disaster devastates part of the country.",
+          "effects": {}
+        },
+        {
+          "year": 1900,
+          "title": "Major Terrorist Attack",
+          "description": "A devastating attack kills hundreds and shocks the nation.",
+          "effects": {}
+        },
+        {
+          "year": 1901,
+          "title": "Constitutional Reform Movement",
+          "description": "Civil society demands significant constitutional changes.",
+          "effects": {}
+        },
+        {
+          "year": 1901,
+          "title": "Revolution",
+          "description": "[REVOLUTION] Popular uprising overthrows the government in Istmarkia!",
+          "effects": {}
+        },
+        {
+          "year": 1902,
+          "title": "Constitutional Reform Movement",
+          "description": "Civil society demands significant constitutional changes.",
+          "effects": {}
+        },
+        {
+          "year": 1902,
+          "title": "Major Terrorist Attack",
+          "description": "A devastating attack kills hundreds and shocks the nation.",
+          "effects": {}
+        },
+        {
+          "year": 1902,
+          "title": "Military Coup",
+          "description": "[COUP] Military seizes power in Istmarkia!",
+          "effects": {}
+        },
+        {
+          "year": 1903,
+          "title": "Constitutional Reform Movement",
+          "description": "Civil society demands significant constitutional changes.",
+          "effects": {}
+        },
+        {
+          "year": 1903,
+          "title": "Border Skirmish",
+          "description": "Armed clashes with a neighboring country raise war fears.",
+          "effects": {}
+        },
+        {
+          "year": 1903,
+          "title": "Epidemic Outbreak",
+          "description": "A dangerous disease spreads through the population.",
+          "effects": {}
+        },
+        {
+          "year": 1903,
+          "title": "Revolution",
+          "description": "[REVOLUTION] Popular uprising overthrows the government in Istmarkia!",
+          "effects": {}
+        },
+        {
+          "year": 1904,
+          "title": "Constitutional Reform Movement",
+          "description": "Civil society demands significant constitutional changes.",
+          "effects": {}
+        },
+        {
+          "year": 1904,
+          "title": "Major Terrorist Attack",
+          "description": "A devastating attack kills hundreds and shocks the nation.",
+          "effects": {}
+        },
+        {
+          "year": 1904,
+          "title": "Revolution",
+          "description": "[REVOLUTION] Popular uprising overthrows the government in Istmarkia!",
+          "effects": {}
+        }
+      ],
+      "neighbor_ids": [
+        "player",
+        "ai_0",
+        "ai_1"
+      ],
+      "pending_events": []
+    }
+  },
+  "relations": {
+    "ai_0|player": {
+      "score": -0.1963562144283954,
+      "at_war": false,
+      "treaty_trade": false,
+      "treaty_defense": false,
+      "sanction_sender": false
+    },
+    "ai_1|player": {
+      "score": 0.1414906996564187,
+      "at_war": false,
+      "treaty_trade": false,
+      "treaty_defense": false,
+      "sanction_sender": false
+    },
+    "ai_2|player": {
+      "score": 0.0054168896756896755,
+      "at_war": false,
+      "treaty_trade": false,
+      "treaty_defense": false,
+      "sanction_sender": false
+    },
+    "ai_0|ai_1": {
+      "score": 0.00965665035039415,
+      "at_war": false,
+      "treaty_trade": false,
+      "treaty_defense": false,
+      "sanction_sender": false
+    },
+    "ai_0|ai_2": {
+      "score": 0.007139469454381275,
+      "at_war": false,
+      "treaty_trade": false,
+      "treaty_defense": false,
+      "sanction_sender": false
+    },
+    "ai_1|ai_2": {
+      "score": -0.03903578464445212,
+      "at_war": false,
+      "treaty_trade": false,
+      "treaty_defense": false,
+      "sanction_sender": false
+    },
+    "ai_3|player": {
+      "score": -0.16279744623512182,
+      "at_war": false,
+      "treaty_trade": false,
+      "treaty_defense": false,
+      "sanction_sender": false
+    },
+    "ai_0|ai_3": {
+      "score": 0.008114882627909718,
+      "at_war": false,
+      "treaty_trade": false,
+      "treaty_defense": false,
+      "sanction_sender": false
+    },
+    "ai_1|ai_3": {
+      "score": -0.054553442926850944,
+      "at_war": false,
+      "treaty_trade": false,
+      "treaty_defense": false,
+      "sanction_sender": false
+    }
+  },
+  "world_events": []
+}
