@@ -558,6 +558,12 @@ _EVENT_MAP: Dict[str, GameEvent] = {e.id: e for e in EVENT_CATALOGUE}
 
 # Per-event cooldown in years (0 = no cooldown)
 EVENT_COOLDOWNS: Dict[str, int] = {
+    "economic_boom": 3,
+    "cultural_renaissance": 4,
+    "terrorist_attack": 5,
+    "tech_breakthrough": 5,
+    "scientific_expedition": 4,
+    "natural_disaster": 3,
     "border_tension": 3,
     "military_coup_attempt": 5,
     "pandemic": 8,
@@ -574,6 +580,7 @@ EVENT_COOLDOWNS: Dict[str, int] = {
     "diplomatic_summit": 3,
     "alliance_offer": 4,
     "environmental_crisis": 5,
+    "trade_boom": 3,
 }
 
 
@@ -650,15 +657,21 @@ class EventSystem:
         n = self.rng.randint(0, max_events)
         if n == 0 or not random_pool:
             return []
-        total = sum(weights)
-        norm = [w / total for w in weights]
-        chosen_indices = self.rng.choices(range(len(random_pool)), weights=norm, k=n)
-        seen = set()
+        # Draw without replacement so a request for two events actually yields
+        # two distinct events whenever the eligible pool is large enough.
+        available = list(zip(random_pool, weights))
         result = []
-        for i in chosen_indices:
-            if i not in seen:
-                seen.add(i)
-                result.append(random_pool[i])
+        for _ in range(min(n, len(available))):
+            total = sum(weight for _, weight in available)
+            if total <= 0:
+                break
+            pick = self.rng.random() * total
+            for index, (event, weight) in enumerate(available):
+                pick -= weight
+                if pick <= 0:
+                    result.append(event)
+                    del available[index]
+                    break
         return result
 
     def apply_event(self, event: GameEvent, country: Country,

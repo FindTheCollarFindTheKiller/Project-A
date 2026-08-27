@@ -106,11 +106,17 @@ class SimulationEngine:
 
     def _check_political_upheaval(self, country: "Country", result: TurnResult) -> None:
         """Check for and apply revolution / coup / separatism events."""
+        risk_modifiers = {
+            "Easy": 0.5,
+            "Normal": 1.0,
+            "Hard": 1.3,
+        }
+        risk_modifier = risk_modifiers.get(getattr(self.world, "difficulty", "Normal"), 1.0)
         # Revolution
-        if self.rng.random() < country.stability.revolution_risk:
+        if self.rng.random() < min(1.0, country.stability.revolution_risk * risk_modifier):
             self._apply_revolution(country, result)
         # Coup
-        elif self.rng.random() < country.stability.coup_risk:
+        elif self.rng.random() < min(1.0, country.stability.coup_risk * risk_modifier):
             self._apply_coup(country, result)
         # Separatism
         elif self.rng.random() < country.stability.separatism_risk * 0.3:

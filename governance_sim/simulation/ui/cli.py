@@ -8,7 +8,7 @@ import json
 from typing import List, Optional, Tuple
 
 from rich.console import Console
-from rich.prompt import Prompt, IntPrompt, Confirm
+from rich.prompt import Prompt, Confirm
 from rich.panel import Panel
 from rich.table import Table
 from rich.text import Text
@@ -69,6 +69,19 @@ def _menu(options: List[Tuple[str, str]], title: str = "Choose an action") -> in
         except ValueError:
             pass
         console.print("[red]Invalid choice, try again.[/]")
+
+
+def _bounded_int(prompt: str, default: int, minimum: int, maximum: int) -> int:
+    """Prompt until an integer falls within the requested range."""
+    while True:
+        raw = Prompt.ask(prompt, default=str(default))
+        try:
+            value = int(raw)
+            if minimum <= value <= maximum:
+                return value
+        except ValueError:
+            pass
+        console.print(f"[red]Enter a whole number from {minimum} to {maximum}.[/]")
 
 
 # ── Archetype descriptions ────────────────────────────────────────────────────
@@ -144,15 +157,12 @@ def setup_new_game() -> Tuple[World, SimulationEngine]:
     difficulty = ["Easy", "Normal", "Hard"][diff_choice - 1]
 
     # Start year
-    start_year_str = Prompt.ask("[bold]Start year[/]", default="1900")
-    try:
-        start_year = int(start_year_str)
-    except ValueError:
-        start_year = 1900
+    start_year = _bounded_int("[bold]Start year[/]", default=1900, minimum=-5000, maximum=3000)
 
     # Number of AI nations
-    num_ai = IntPrompt.ask("[bold]Number of AI nations in the world[/]", default=5)
-    num_ai = max(1, min(20, num_ai))
+    num_ai = _bounded_int(
+        "[bold]Number of AI nations in the world[/]", default=5, minimum=1, maximum=20
+    )
 
     console.print("\n[bold]Generating world...[/]")
     gen = CountryGenerator()
@@ -324,7 +334,9 @@ def menu_policy(country: Country, engine: SimulationEngine) -> None:
             raw = Prompt.ask("Department number", default="1")
             try:
                 di = int(raw) - 1
-                dept = dept_list[max(0, min(len(dept_list) - 1, di))]
+                if not 0 <= di < len(dept_list):
+                    raise ValueError
+                dept = dept_list[di]
                 pct = Prompt.ask(
                     f"New allocation for [bold]{dept.replace('_', ' ').title()}[/] (e.g. 0.20)",
                     default=f"{country.government.budget_allocation[dept]:.2f}"
@@ -580,7 +592,7 @@ def _load_save_preview(save_dir: str) -> List[Tuple[str, str]]:
     saves = []
     if not os.path.exists(save_dir):
         return saves
-    for fname in sorted(os.listdir(save_dir)):
+    for fname in sorted(os.listdir(save_dir), reverse=True):
         if not fname.endswith(".json"):
             continue
         path = os.path.join(save_dir, fname)
@@ -737,11 +749,19 @@ def run_cli() -> None:
             t.add_row(str(i), fname, desc)
         console.print(t)
 
-        raw = Prompt.ask("Save number", default="1")
+        while True:
+            raw = Prompt.ask(f"Save number (1–{len(previews)})", default="1")
+            try:
+                idx = int(raw) - 1
+                if 0 <= idx < len(previews):
+                    break
+            except ValueError:
+                pass
+            console.print("[red]Enter one of the listed save numbers.[/]")
+
+        fname, _ = previews[idx]
+        path = os.path.join(save_dir, fname)
         try:
-            idx = int(raw) - 1
-            fname, _ = previews[max(0, min(len(previews) - 1, idx))]
-            path = os.path.join(save_dir, fname)
             world = load_game(path)
             engine = SimulationEngine(world)
             game_loop(world, engine)

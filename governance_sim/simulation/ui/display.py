@@ -114,14 +114,14 @@ def print_country_dashboard(country: "Country") -> None:
 
     # ── Budget line ───────────────────────────────────────────────────────────
     revenue = c.economy.gdp_total * c.government.tax_rate
-    spending = c.economy.gdp_total * c.government.tax_rate
-    surplus = revenue - spending
-    surplus_color = "green" if surplus >= 0 else "red"
-    surplus_label = "Surplus" if surplus >= 0 else "Deficit"
+    allocated = revenue * sum(c.government.budget_allocation.values())
+    delivered = revenue * sum(c.government.effective_spending.values())
+    leakage = max(0.0, allocated - delivered)
     budget_line = (
         f"[dim]Tax Revenue:[/] [cyan]${revenue:.1f}B[/]  "
-        f"[dim]Spending:[/] [cyan]${spending:.1f}B[/]  "
-        f"[dim]{surplus_label}:[/] [{surplus_color}]${abs(surplus):.1f}B[/]  "
+        f"[dim]Allocated:[/] [cyan]${allocated:.1f}B[/]  "
+        f"[dim]Delivered:[/] [green]${delivered:.1f}B[/]  "
+        f"[dim]Leakage:[/] [yellow]${leakage:.1f}B[/]  "
         f"[dim]Pop:[/] [cyan]{c.population_str}[/]  "
         f"[dim]GDP:[/] [cyan]{c.gdp_str}[/]  "
         f"[dim]GDP/cap:[/] [cyan]${c.economy.gdp_per_capita:,.0f}[/]"
@@ -132,7 +132,7 @@ def print_country_dashboard(country: "Country") -> None:
     def _kv(label: str, val: str, arrow: str = "", bar_val: Optional[float] = None) -> str:
         b = f" {_bar(bar_val)}" if bar_val is not None else ""
         a = f" {arrow}" if arrow else ""
-        return f"[bold]{label:<22}[/]{val}{b}{a}"
+        return f"[bold]{label:<18}[/]{val}{b}{a}"
 
     gov_rows = [
         _kv("Stability",       _color_score(c.stability.overall),         _delta_arrow(c.stability.overall,           prev.get("stability")),           c.stability.overall),
@@ -160,9 +160,9 @@ def print_country_dashboard(country: "Country") -> None:
     ]
 
     console.print(Columns([
-        Panel("\n".join(gov_rows),  title="[bold]Governance[/]",   box=box.ROUNDED, width=46),
-        Panel("\n".join(dev_rows),  title="[bold]Development[/]",  box=box.ROUNDED, width=46),
-        Panel("\n".join(econ_rows), title="[bold]Economy[/]",      box=box.ROUNDED, width=46),
+        Panel("\n".join(gov_rows),  title="[bold]Governance[/]",   box=box.ROUNDED, width=40),
+        Panel("\n".join(dev_rows),  title="[bold]Development[/]",  box=box.ROUNDED, width=40),
+        Panel("\n".join(econ_rows), title="[bold]Economy[/]",      box=box.ROUNDED, width=40),
     ]))
 
     # ── Risk panel ────────────────────────────────────────────────────────────
