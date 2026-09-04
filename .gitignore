@@ -1,0 +1,8 @@
+governance_sim/build/
+governance_sim/dist/
+governance_sim/__pycache__/
+governance_sim/**/__pycache__/
+*.pyc
+.venv/
+saves/
+governance_sim/saves/*.json

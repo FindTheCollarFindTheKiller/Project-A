@@ -21,6 +21,7 @@ from ..systems.events import GameEvent
 from ..systems.generator import CountryGenerator, ARCHETYPES
 from ..systems.advisor import Advisor
 from ..persistence.save_load import save_game, load_game
+from ..paths import saves_dir
 from .display import (
     console,
     print_country_dashboard,
@@ -456,10 +457,12 @@ def menu_diplomacy(country: Country, world: World, engine: SimulationEngine) -> 
             ("Sign Defense Pact",    "Form mutual defense treaty"),
             ("Inspect Nation",       "View a nation's full dashboard"),
             ("Declare War",          "Declare open war on another nation"),
+            ("Sue for Peace",        "Offer to end an active war"),
+            ("Espionage",            "Covertly steal tech, sabotage, or incite unrest"),
             ("← Back",              ""),
         ], "Diplomatic Action")
 
-        if choice == 8:
+        if choice == 10:
             break
 
         elif choice == 1:
@@ -505,11 +508,69 @@ def menu_diplomacy(country: Country, world: World, engine: SimulationEngine) -> 
                     console.print(f"\n[bold red]⚠ WARNING: Declaring war on {target.name} will severely damage "
                                   f"international relations and destabilise your economy.[/]")
                     if Confirm.ask(f"Declare war on {target.name}?", default=False):
-                        world.declare_war(country.id, target_id)
+                        extra_logs = world.declare_war(country.id, target_id)
                         console.print(f"[bold red]War declared on {target.name}![/]")
+                        for entry in extra_logs:
+                            console.print(f"[red]{entry[5:].strip()}[/]")
                         _pause()
             except (ValueError, IndexError):
                 console.print("[red]Invalid.[/]")
+
+        elif choice == 8:
+            at_war_with = [(other, rel) for other, rel in world.relations_for(country.id) if rel.at_war]
+            if not at_war_with:
+                console.print("[dim]You are not currently at war with anyone.[/]")
+                _pause()
+                continue
+            console.print("\n[bold]Select nation to sue for peace with:[/]")
+            for i, (other, rel) in enumerate(at_war_with, 1):
+                console.print(f"  {i}. {other.name} (your war exhaustion: {country.military.war_exhaustion:.0%})")
+            raw = Prompt.ask("Nation number", default="1")
+            try:
+                ti = int(raw) - 1
+                if 0 <= ti < len(at_war_with):
+                    target = at_war_with[ti][0]
+                    if world.sue_for_peace(country.id, target.id):
+                        console.print(f"[green]Peace agreed with {target.name}.[/]")
+                    else:
+                        console.print("[red]Peace offer failed.[/]")
+                    _pause()
+            except (ValueError, IndexError):
+                console.print("[red]Invalid.[/]")
+
+        elif choice == 9:
+            others = [(cid, c) for cid, c in world.countries.items() if cid != country.id]
+            if not others:
+                console.print("[dim]No other nations.[/]")
+                _pause()
+                continue
+            console.print("\n[bold]Select target nation:[/]")
+            for i, (cid, c) in enumerate(others, 1):
+                rel = world.get_relation(country.id, cid)
+                console.print(f"  {i}. {c.name} [{rel.stance.value}] ({rel.score:+.2f})")
+            raw = Prompt.ask("Nation number", default="1")
+            try:
+                ti = int(raw) - 1
+                if not 0 <= ti < len(others):
+                    raise ValueError
+                target_id, target = others[ti]
+            except (ValueError, IndexError):
+                console.print("[red]Invalid.[/]")
+                continue
+            op_choice = _menu([
+                ("Steal Technology",  "Attempt to acquire the target's research secrets"),
+                ("Sabotage Economy",  "Attempt to disrupt the target's economic growth"),
+                ("Incite Unrest",     "Attempt to stir up protests within the target"),
+                ("← Back",           ""),
+            ], "Espionage Operation")
+            operations = ["steal_tech", "sabotage_economy", "incite_unrest"]
+            if op_choice <= 3:
+                console.print("[dim]Covert operations carry a risk of exposure that will damage relations.[/]")
+                if Confirm.ask(f"Proceed against {target.name}?", default=False):
+                    log = world.attempt_espionage(country.id, target_id, operations[op_choice - 1])
+                    if log:
+                        console.print(f"[magenta]{log[11:].strip()}[/]")
+                    _pause()
 
         elif choice in (2, 3, 4, 5):
             others = [(cid, c) for cid, c in world.countries.items() if cid != country.id]
@@ -618,6 +679,23 @@ def _load_save_preview(save_dir: str) -> List[Tuple[str, str]]:
     return saves
 
 
+# ── Graphics ─────────────────────────────────────────────────────────────────
+
+def _launch_graphics(world: World) -> None:
+    try:
+        from ..graphics.engine import run_graphics_view
+    except ImportError:
+        console.print("[red]The graphics engine requires pygame. Install with: pip install -r requirements.txt[/]")
+        _pause()
+        return
+    console.print("[dim]Opening world map window — close it or press Esc to return.[/]")
+    try:
+        run_graphics_view(world)
+    except Exception as exc:
+        console.print(f"[red]Graphics engine error: {exc}[/]")
+        _pause()
+
+
 # ── Main game loop ───────────────────────────────────────────────────────────
 
 def game_loop(world: World, engine: SimulationEngine) -> None:
@@ -642,6 +720,7 @@ def game_loop(world: World, engine: SimulationEngine) -> None:
             ("Policy",         "Adjust laws, budget, and spending"),
             ("Foreign Affairs", "Diplomacy, trade agreements, sanctions"),
             ("Inspect",        "Detailed stats: government, culture, geography, military"),
+            ("World Map",      "Open the interactive graphical world map"),
             ("Save Game",      ""),
             ("Quit",           ""),
         ], f"Year {player.current_year} — What will you do?")
@@ -655,7 +734,7 @@ def game_loop(world: World, engine: SimulationEngine) -> None:
             result = engine.advance_turn(player, auto_resolve_events=False)
 
             # Advance world diplomacy and year counter once per calendar year
-            engine.world.advance_world_year()
+            war_logs = engine.world.advance_world_year()
 
             # Resolve player-choice events first (needs player input before summary)
             if result.pending_choices:
@@ -664,8 +743,9 @@ def game_loop(world: World, engine: SimulationEngine) -> None:
             # Show turn summary
             _clear()
             all_events = result.all_events
-            ai_logs = [entry for ai_result in ai_results.values() for entry in ai_result.log if entry.startswith("[AI]")]
-            print_turn_summary(player, all_events, result.log, ai_logs=ai_logs)
+            ai_logs = [entry for ai_result in ai_results.values() for entry in ai_result.log
+                       if entry.startswith(("[AI]", "[WAR]", "[ESPIONAGE]"))]
+            print_turn_summary(player, all_events, result.log, world_logs=ai_logs + war_logs)
             _pause()
 
             # Check for game over
@@ -686,11 +766,14 @@ def game_loop(world: World, engine: SimulationEngine) -> None:
             menu_inspect(player, world)
 
         elif choice == 5:
+            _launch_graphics(world)
+
+        elif choice == 6:
             path = save_game(world)
             console.print(f"[green]Game saved to {path}[/]")
             _pause()
 
-        elif choice == 6:
+        elif choice == 7:
             if Confirm.ask("Quit the game?"):
                 console.print("[dim]Goodbye.[/]")
                 sys.exit(0)
@@ -715,7 +798,7 @@ def run_cli() -> None:
     console.print(Panel(Align.center(title), box=box.DOUBLE_EDGE, border_style="bright_blue", padding=(0, 4)))
     console.print()
 
-    save_dir = os.path.join(os.path.dirname(__file__), "..", "..", "saves")
+    save_dir = saves_dir()
     try:
         n_saves = sum(1 for f in os.listdir(save_dir) if f.endswith(".json")) if os.path.isdir(save_dir) else 0
     except OSError:

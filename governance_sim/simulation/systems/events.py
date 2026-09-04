@@ -54,10 +54,43 @@ def _apply_delta(obj: Any, path: str, delta: Any) -> None:
             setattr(obj, attr, delta)
 
 
+# Fields that represent a 0-1 fraction/probability and must stay in range even
+# though individual event effects are simple unclamped deltas.
+_UNIT_INTERVAL_FIELDS = {
+    "government.legitimacy", "government.civil_liberties", "government.press_freedom",
+    "government.corruption", "government.military_loyalty", "government.executive_strength",
+    "government.legislative_strength", "government.judicial_independence",
+    "culture.ethnic_tension", "culture.gender_equality", "culture.national_identity",
+    "culture.cultural_output", "culture.religious_influence", "culture.secularism",
+    "culture.ethnic_diversity", "culture.social_cohesion",
+    "demographics.happiness", "demographics.healthcare_index", "demographics.education_index",
+    "stability.protest_level", "stability.separatism_risk",
+    "economy.sanctions_level", "economy.gini_coefficient",
+    "military.morale", "technology.innovation_index",
+}
+
+
+def _clamp_unit_interval(obj: Any, path: str) -> None:
+    parts = path.split(".")
+    for part in parts[:-1]:
+        obj = obj[part] if isinstance(obj, dict) else getattr(obj, part)
+    attr = parts[-1]
+    if isinstance(obj, dict):
+        value = obj.get(attr)
+        if isinstance(value, (int, float)):
+            obj[attr] = max(0.0, min(1.0, value))
+    else:
+        value = getattr(obj, attr, None)
+        if isinstance(value, (int, float)):
+            setattr(obj, attr, max(0.0, min(1.0, value)))
+
+
 def apply_event_effects(country: Country, effects: Dict[str, Any]) -> None:
     for path, delta in effects.items():
         try:
             _apply_delta(country, path, delta)
+            if path in _UNIT_INTERVAL_FIELDS:
+                _clamp_unit_interval(country, path)
         except AttributeError as e:
             import sys
             print(f"[event-warning] Bad effect path '{path}': {e}", file=sys.stderr)

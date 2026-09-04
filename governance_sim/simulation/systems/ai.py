@@ -44,9 +44,10 @@ class OpponentAI:
         logs = apply_policy(country, domain, **kwargs)
         actions = [f"[AI] {country.name}: {label}"] if logs else []
 
-        diplomacy = self._diplomatic_move(country, world)
+        diplomacy, extra_logs = self._diplomatic_move(country, world)
         if diplomacy:
             actions.append(f"[AI] {country.name}: {diplomacy}")
+        actions.extend(extra_logs)
         return actions
 
     def _policy_candidates(self, c: "Country", world: "World") -> List[Tuple[float, str, dict, str]]:
@@ -73,9 +74,26 @@ class OpponentAI:
         ]
         return [(score, domain, kwargs, label) for score, domain, kwargs, label in candidates if score > 0.03]
 
-    def _diplomatic_move(self, c: "Country", world: "World") -> str:
+    def _diplomatic_move(self, c: "Country", world: "World") -> Tuple[str, List[str]]:
+        # Urgent: sue for peace once war weariness becomes severe.
+        if c.military.war_exhaustion > 0.55:
+            for other, relation in world.relations_for(c.id):
+                if relation.at_war and world.sue_for_peace(c.id, other.id):
+                    return f"sued for peace with {other.name}", []
+
+        # Opportunistic espionage against a rival, independent of the main diplomacy roll.
+        if self.rng.random() < 0.10:
+            rivals = [other for other, relation in world.relations_for(c.id)
+                      if relation.score < -0.1 and not relation.at_war]
+            if rivals:
+                target = self.rng.choice(rivals)
+                operation = self.rng.choice(("steal_tech", "sabotage_economy", "incite_unrest"))
+                log = world.attempt_espionage(c.id, target.id, operation)
+                if log:
+                    return "", [log]
+
         if self.rng.random() > 0.28:
-            return ""
+            return "", []
         options = []
         for other, relation in world.relations_for(c.id):
             if relation.at_war:
@@ -85,16 +103,17 @@ class OpponentAI:
                 options.append((relation.score + 0.25, "trade", other))
             if relation.score > 0.35 and not relation.treaty_defense and c.military.conventional_strength < 0.55:
                 options.append((relation.score + 0.15, "defense", other))
-            if relation.score < -0.45 and power_gap > 0.12 and self.rng.random() < 0.20:
+            if (relation.score < -0.45 and power_gap > 0.12 and c.military.war_exhaustion < 0.3
+                    and self.rng.random() < 0.20):
                 options.append((0.25 + power_gap, "war", other))
         if not options:
-            return ""
+            return "", []
         _, action, target = self.rng.choice(sorted(options, reverse=True, key=lambda item: item[0])[:3])
         if action == "trade":
             world.sign_trade_agreement(c.id, target.id)
-            return f"signed a trade agreement with {target.name}"
+            return f"signed a trade agreement with {target.name}", []
         if action == "defense":
             world.sign_defense_pact(c.id, target.id)
-            return f"signed a defense pact with {target.name}"
-        world.declare_war(c.id, target.id)
-        return f"declared war on {target.name}"
+            return f"signed a defense pact with {target.name}", []
+        extra_logs = world.declare_war(c.id, target.id)
+        return f"declared war on {target.name}", extra_logs

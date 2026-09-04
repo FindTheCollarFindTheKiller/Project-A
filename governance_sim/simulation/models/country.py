@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Tuple
 from .geography import Geography
 from .government import Government
 from .culture import Culture
@@ -40,6 +40,7 @@ class Country:
     neighbor_ids: List[str] = field(default_factory=list)
     pending_events: List[dict] = field(default_factory=list)
     previous_stats: dict = field(default_factory=dict)   # snapshot before each turn
+    metric_history: List[Tuple[int, dict]] = field(default_factory=list)  # (year, stats) time series
     event_cooldowns: dict = field(default_factory=dict)  # {event_id: years_remaining}
 
     @property
@@ -114,6 +115,9 @@ class Country:
             "soft_power": self.culture.soft_power,
             "population": self.demographics.population,
         }
+        self.metric_history.append((self.current_year, dict(self.previous_stats)))
+        if len(self.metric_history) > 400:
+            self.metric_history.pop(0)
 
     def summary_dict(self) -> dict:
         return {

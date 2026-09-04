@@ -15,6 +15,7 @@ class Military:
     equipment_quality: float = 0.55       # 0-1
     veteran_ratio: float = 0.15           # fraction of forces with combat experience
     paramilitary_strength: float = 0.3    # internal security forces 0-1
+    war_exhaustion: float = 0.0           # 0=fresh, 1=on the verge of capitulation
 
     @property
     def conventional_strength(self) -> float:

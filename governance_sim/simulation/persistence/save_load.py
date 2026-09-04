@@ -26,8 +26,9 @@ from ..models.enums import (
     TechTier, MilitaryDoctrine,
     Religion, LanguageFamily, ScriptSystem, LanguagePolicy,
 )
+from ..paths import saves_dir
 
-_SAVES_DIR = os.path.join(os.path.dirname(__file__), "..", "..", "saves")
+_SAVES_DIR = saves_dir()
 
 
 def _enum_val(v: Any) -> Any:

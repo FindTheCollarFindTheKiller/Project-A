@@ -191,6 +191,8 @@ def _print_risk_panel(c: "Country") -> None:
         ("Civil War",  c.stability.civil_war_risk,   0.10, 0.25),
         ("Protest",    c.stability.protest_level,    0.35, 0.60),
     ]
+    if c.military.war_exhaustion > 0.0:
+        risks.append(("War Exhaustion", c.military.war_exhaustion, 0.40, 0.70))
     parts = []
     for name, val, med, hi in risks:
         color = "red bold" if val >= hi else ("yellow" if val >= med else "green")
@@ -230,7 +232,7 @@ def print_advisor_inline(country: "Country") -> None:
 # ── Turn summary ──────────────────────────────────────────────────────────────
 
 def print_turn_summary(country: "Country", events: List["GameEvent"], log: List[str],
-                       ai_logs: Optional[List[str]] = None) -> None:
+                       world_logs: Optional[List[str]] = None) -> None:
     c = country
     prev = c.previous_stats
     year = c.current_year - 1  # summary is for the year just completed
@@ -260,9 +262,18 @@ def print_turn_summary(country: "Country", events: List["GameEvent"], log: List[
                 box=box.ROUNDED,
             ))
 
-    if ai_logs:
-        console.print(Panel("\n".join(f"  {entry[5:]}" for entry in ai_logs),
-                           title="[bold cyan]World Intelligence[/]", box=box.ROUNDED))
+    if world_logs:
+        lines = []
+        for entry in world_logs:
+            if entry.startswith("[WAR]"):
+                lines.append(f"[bold red]⚔ {entry[5:].strip()}[/]")
+            elif entry.startswith("[ESPIONAGE]"):
+                lines.append(f"[magenta]\U0001f575 {entry[11:].strip()}[/]")
+            elif entry.startswith("[AI]"):
+                lines.append(f"[cyan]▶ {entry[4:].strip()}[/]")
+            else:
+                lines.append(entry)
+        console.print(Panel("\n".join(lines), title="[bold cyan]World Intelligence[/]", box=box.ROUNDED))
 
     # Key changes table
     if prev:
@@ -530,7 +541,9 @@ def print_relations(country: "Country", world: "World") -> None:
         if rel.treaty_defense:
             treaties.append("[blue]Defense[/]")
         if rel.at_war:
-            treaties.append("[bold red]AT WAR[/]")
+            treaties.append(
+                f"[bold red]AT WAR[/] [dim](exh {country.military.war_exhaustion:.0%}/{other.military.war_exhaustion:.0%})[/]"
+            )
         if rel.sanction_sender:
             treaties.append("[yellow]Sanctions[/]")
         score_color = "green" if rel.score > 0.25 else ("red" if rel.score < -0.25 else "yellow")

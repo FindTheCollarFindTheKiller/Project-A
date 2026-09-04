@@ -8,7 +8,7 @@ from typing import List, Optional, Tuple, TYPE_CHECKING
 if TYPE_CHECKING:
     from ..models.country import Country
 
-from ..models.enums import GovernmentType, TechTier
+from ..models.enums import GovernmentType, TechTier, ElectionSystem, SuccessionType
 from .feedback import apply_all_feedback
 from .events import EventSystem, GameEvent
 from .world import World
@@ -71,6 +71,12 @@ class SimulationEngine:
 
         # 6. Revolution / Coup / Collapse checks
         self._check_political_upheaval(country, result)
+
+        # 6b. Democratic elections on a fixed term cycle
+        self._check_elections(country, result)
+
+        # 6c. Hereditary succession for monarchies
+        self._check_succession(country, result)
 
         # 7. Advance year
         country.current_year += 1
@@ -181,6 +187,62 @@ class SimulationEngine:
         country.government.budget_allocation["military"] = min(0.40,
             country.government.budget_allocation.get("military", 0.15) + 0.08)
         country.government.validate_budget()
+
+    def _check_elections(self, country: "Country", result: TurnResult) -> None:
+        """Democracies hold elections on a fixed 4-year term; performance decides the outcome."""
+        gov = country.government
+        term_length = 4
+        if not gov.is_democratic or gov.election_system == ElectionSystem.NONE:
+            return
+        if gov.years_in_power <= 0 or gov.years_in_power % term_length != 0:
+            return
+
+        approval = (
+            country.demographics.happiness * 0.35
+            + country.stability.overall * 0.30
+            + max(0.0, min(1.0, country.economy.gdp_growth * 10)) * 0.20
+            + (1.0 - gov.corruption) * 0.15
+        )
+        incumbent_wins = self.rng.random() < min(0.95, max(0.05, approval))
+        if incumbent_wins:
+            gov.legitimacy = min(0.98, gov.legitimacy + 0.05)
+            msg = f"[Election] {country.name}: incumbent government re-elected (approval {approval:.0%})."
+            country.add_history("Election", msg)
+        else:
+            gov.years_in_power = 0
+            gov.legitimacy = min(0.98, max(gov.legitimacy, 0.55))
+            gov.corruption = max(0.05, gov.corruption - 0.05)
+            country.demographics.happiness = min(1.0, country.demographics.happiness + 0.05)
+            msg = f"[Election] {country.name}: opposition wins, power transfers peacefully (approval {approval:.0%})."
+            country.add_history("Change of Government", msg)
+        result.add_log(msg)
+
+    def _check_succession(self, country: "Country", result: TurnResult) -> None:
+        """Hereditary monarchs eventually die; the heir's quality is a gamble."""
+        gov = country.government
+        if gov.succession_type != SuccessionType.HEREDITARY:
+            return
+        if self.rng.random() >= 0.03:
+            return
+
+        quality = self.rng.uniform(0.2, 1.0)
+        gov.years_in_power = 0
+        gov.legitimacy = max(0.05, min(0.98, gov.legitimacy + (quality - 0.55) * 0.25))
+        if quality >= 0.75:
+            descriptor = "a capable and popular heir"
+            gov.corruption = max(0.05, gov.corruption - 0.04)
+            country.demographics.happiness = min(1.0, country.demographics.happiness + 0.03)
+        elif quality <= 0.4:
+            descriptor = "a weak and contested heir"
+            gov.corruption = min(0.95, gov.corruption + 0.05)
+            country.stability.political = max(0.05, country.stability.political - 0.08)
+            if quality <= 0.28:
+                country.stability.separatism_risk = min(0.80, country.stability.separatism_risk + 0.05)
+        else:
+            descriptor = "an untested heir"
+        msg = f"[Succession] {country.name}: the monarch has died; the throne passes to {descriptor}."
+        result.add_log(msg)
+        country.add_history("Royal Succession", msg)
 
     def _apply_separatism(self, country: "Country", result: TurnResult) -> None:
         msg = f"[SEPARATISM] A separatist movement gains significant ground in {country.name}."
