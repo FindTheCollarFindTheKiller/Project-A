@@ -649,7 +649,7 @@ def game_loop(world: World, engine: SimulationEngine) -> None:
         if choice == 1:
             _clear()
             console.print("[dim]Simulating AI nations...[/]")
-            engine.advance_world_turn(auto_resolve_events=True)
+            ai_results = engine.advance_world_turn(auto_resolve_events=True)
 
             # Advance player
             result = engine.advance_turn(player, auto_resolve_events=False)
@@ -664,7 +664,8 @@ def game_loop(world: World, engine: SimulationEngine) -> None:
             # Show turn summary
             _clear()
             all_events = result.all_events
-            print_turn_summary(player, all_events, result.log)
+            ai_logs = [entry for ai_result in ai_results.values() for entry in ai_result.log if entry.startswith("[AI]")]
+            print_turn_summary(player, all_events, result.log, ai_logs=ai_logs)
             _pause()
 
             # Check for game over

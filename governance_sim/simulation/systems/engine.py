@@ -12,6 +12,7 @@ from ..models.enums import GovernmentType, TechTier
 from .feedback import apply_all_feedback
 from .events import EventSystem, GameEvent
 from .world import World
+from .ai import OpponentAI
 
 
 class TurnResult:
@@ -34,6 +35,7 @@ class SimulationEngine:
         self.world = world
         self.rng = rng or random.Random()
         self.event_system = EventSystem(self.rng)
+        self.opponent_ai = OpponentAI(self.rng)
 
     # ── Public API ──────────────────────────────────────────────────────────
 
@@ -60,8 +62,8 @@ class SimulationEngine:
             if event.is_player_choice() and not auto_resolve_events:
                 result.pending_choices.append((event, country))
             else:
-                # Auto-apply base effects only
-                self.event_system.apply_event(event, country, choice_index=None)
+                choice_index = self._choose_ai_event_response(event, country) if auto_resolve_events else None
+                self.event_system.apply_event(event, country, choice_index=choice_index)
                 result.add_log(f"[Event] {event.name}: {event.description}")
 
         # 5. Technology tier advancement check
@@ -81,9 +83,37 @@ class SimulationEngine:
         for cid, country in self.world.countries.items():
             if cid == self.world.player_id:
                 continue
+            ai_logs = self.opponent_ai.take_turn(country, self.world, self.apply_policy)
             result = self.advance_turn(country, auto_resolve_events=True)
+            result.log[0:0] = ai_logs
             results[cid] = result
         return results
+
+    def _choose_ai_event_response(self, event: GameEvent, country: "Country") -> Optional[int]:
+        if not event.choices:
+            return None
+
+        def score(choice: object) -> float:
+            effects = getattr(choice, "effects", {})
+            value = 0.0
+            for path, delta in effects.items():
+                if not isinstance(delta, (int, float)):
+                    continue
+                if "stability" in path or "legitimacy" in path or "happiness" in path:
+                    value += delta * (2.0 if country.stability.overall < 0.45 else 1.0)
+                elif "gdp" in path or "unemployment" in path:
+                    value += delta * (1.5 if country.economy.gdp_growth < 0 else 0.8)
+                elif "tension" in path or "corruption" in path:
+                    value += delta * 1.2
+                elif "civil_liberties" in path and country.government.is_democratic:
+                    value += delta
+            return value
+
+        scores = [score(choice) for choice in event.choices]
+        best = max(scores)
+        # Near ties remain uncertain, which makes event handling less robotic.
+        contenders = [i for i, value in enumerate(scores) if value >= best - 0.08]
+        return self.rng.choice(contenders)
 
     def resolve_event(self, event: GameEvent, country: "Country", choice_index: int) -> None:
         """Apply a player's choice to an event."""

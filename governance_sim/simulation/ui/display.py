@@ -229,7 +229,8 @@ def print_advisor_inline(country: "Country") -> None:
 
 # ── Turn summary ──────────────────────────────────────────────────────────────
 
-def print_turn_summary(country: "Country", events: List["GameEvent"], log: List[str]) -> None:
+def print_turn_summary(country: "Country", events: List["GameEvent"], log: List[str],
+                       ai_logs: Optional[List[str]] = None) -> None:
     c = country
     prev = c.previous_stats
     year = c.current_year - 1  # summary is for the year just completed
@@ -258,6 +259,10 @@ def print_turn_summary(country: "Country", events: List["GameEvent"], log: List[
                 title="[bold]Events This Year[/]",
                 box=box.ROUNDED,
             ))
+
+    if ai_logs:
+        console.print(Panel("\n".join(f"  {entry[5:]}" for entry in ai_logs),
+                           title="[bold cyan]World Intelligence[/]", box=box.ROUNDED))
 
     # Key changes table
     if prev:
