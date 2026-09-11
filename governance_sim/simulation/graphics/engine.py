@@ -43,6 +43,10 @@ _STANCE_COLORS = {
 
 _MIN_ZOOM, _MAX_ZOOM = 0.3, 4.0
 
+_BUTTON_BG = (34, 42, 56)
+_BUTTON_HOVER = (52, 64, 84)
+_BUTTON_BORDER = (90, 95, 105)
+
 _METRIC_COLORS = {
     "stability": (100, 200, 255),
     "happiness": (255, 200, 100),
@@ -89,6 +93,8 @@ class GraphicsEngine:
         self._status_timer = 0
         self.view_mode = "map"
         self.show_all_edges = True
+        self._buttons: List[Tuple[str, "pygame.Rect"]] = []
+        self._hover_button: Optional[str] = None
         self._fit_camera_to_positions()
 
     def _fit_camera_to_positions(self) -> None:
@@ -122,7 +128,11 @@ class GraphicsEngine:
                     if not running:
                         break
                 self._apply_keyboard_pan()
-                self._hover_id = self._node_at(pygame.mouse.get_pos())
+                mouse_pos = pygame.mouse.get_pos()
+                self._hover_id = self._node_at(mouse_pos)
+                self._hover_button = self._button_at(mouse_pos)
+                cursor = pygame.SYSTEM_CURSOR_HAND if (self._hover_button or self._hover_id) else pygame.SYSTEM_CURSOR_ARROW
+                pygame.mouse.set_cursor(cursor)
                 self._render(screen, font, font_small, font_title)
                 pygame.display.flip()
                 clock.tick(60)
@@ -154,6 +164,9 @@ class GraphicsEngine:
             self.camera.zoom = max(15.0, min(200.0, self.camera.zoom * factor))
         elif event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:
+                clicked_button = self._button_at(event.pos)
+                if clicked_button:
+                    return self._activate_button(clicked_button, screen)
                 self._select_at(event.pos)
             elif event.button == 3:
                 self._panning = True
@@ -213,6 +226,27 @@ class GraphicsEngine:
         if best_id:
             self.selected_id = best_id
 
+    def _button_at(self, mouse_pos: Tuple[int, int]) -> Optional[str]:
+        for name, rect in self._buttons:
+            if rect.collidepoint(mouse_pos):
+                return name
+        return None
+
+    def _activate_button(self, name: str, screen: "pygame.Surface") -> bool:
+        if name == "reset":
+            self._fit_camera_to_positions()
+        elif name == "view_mode":
+            self.view_mode = "charts" if self.view_mode == "map" else "map"
+        elif name == "edges":
+            self.show_all_edges = not self.show_all_edges
+        elif name == "screenshot":
+            self._save_screenshot(screen)
+        elif name == "next":
+            self._cycle_selection()
+        elif name == "close":
+            return False
+        return True
+
     # ── Rendering ────────────────────────────────────────────────────────────
 
     def _node_radius(self, country: "Country") -> float:
@@ -259,6 +293,7 @@ class GraphicsEngine:
         self._draw_tooltip(screen, font_small)
         self._draw_status(screen, font_small)
         self._draw_topbar(screen, font_small)
+        self._draw_buttons(screen, font_small, panel_width)
 
     def _draw_edge(self, screen, a_id: str, b_id: str, map_size: Tuple[int, int]) -> None:
         pos_a, pos_b = self.positions.get(a_id), self.positions.get(b_id)
@@ -286,6 +321,32 @@ class GraphicsEngine:
             True, _DIM,
         )
         screen.blit(text, (10, 32))
+
+    def _draw_buttons(self, screen, font_small, panel_width: int) -> None:
+        """Clickable toolbar giving mouse-only access to every core action."""
+        labels = [
+            ("reset", "Reset View"),
+            ("view_mode", "Charts" if self.view_mode == "map" else "Map"),
+            ("edges", "Key Relations Only" if self.show_all_edges else "All Relations"),
+            ("next", "Next Nation"),
+            ("screenshot", "Screenshot"),
+            ("close", "Close"),
+        ]
+        self._buttons = []
+        x = self.width - panel_width - 8
+        y = 4
+        pad_x = 10
+        for name, label in labels:
+            text = font_small.render(label, True, _TEXT)
+            btn_w = text.get_width() + pad_x * 2
+            btn_h = text.get_height() + 8
+            rect = pygame.Rect(x - btn_w, y, btn_w, btn_h)
+            bg = _BUTTON_HOVER if self._hover_button == name else _BUTTON_BG
+            pygame.draw.rect(screen, bg, rect, border_radius=4)
+            pygame.draw.rect(screen, _BUTTON_BORDER, rect, width=1, border_radius=4)
+            screen.blit(text, (rect.x + pad_x, rect.y + 4))
+            self._buttons.append((name, rect))
+            x -= btn_w + 8
 
     def _draw_charts(self, screen, font, font_small, map_size: Tuple[int, int]) -> None:
         x0, y0 = 20, 20
@@ -368,6 +429,7 @@ class GraphicsEngine:
             "Drag right mouse / WASD / arrows: pan   Wheel: zoom",
             "Click: select   Tab: cycle nations   R: reset view",
             "C: toggle charts   E: toggle all/significant relations   P: screenshot   Esc: close",
+            "Toolbar buttons (top-right): click for mouse-only access to the actions above",
             "Node color: stability (red -> green)   Gold ring: your nation   Yellow square: sanctions",
         ]
         y = self.height - 18 * len(lines) - 8
